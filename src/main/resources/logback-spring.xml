@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE logback>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] [userId=%X{userId}] %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="aiAppender" class="com.microsoft.applicationinsights.logback.ApplicationInsightsAppender">
+    <instrumentationKey></instrumentationKey>
+  </appender>
+  <logger name="org.springframework.web" additivity="false">
+    <level value="WARN" />
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="aiAppender" />
+  </logger>
+  <root>
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="aiAppender" />
+  </root>
+</configuration>
